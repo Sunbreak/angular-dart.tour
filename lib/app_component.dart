@@ -16,6 +16,7 @@ import 'src/routes.dart';
     </nav>
     <router-outlet [routes]="Routes.all"></router-outlet>
   ''',
+  styleUrls: ['app_component.css'],
   directives: [routerDirectives],
   providers: [ClassProvider(HeroService)],
   exports: [RoutePaths, Routes],
