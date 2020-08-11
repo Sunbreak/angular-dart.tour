@@ -25,11 +25,24 @@ class HeroListComponent implements OnInit {
   List<Hero> heroes;
 
   Future<void> _getHeroes() async {
-    heroes = await _heroService.getAllSlowly();
+    heroes = await _heroService.getAll();
   }
 
   @override
   void ngOnInit() => _getHeroes();
+
+  Future<void> add(String name) async {
+    name = name.trim();
+    if (name.isEmpty) return null;
+    heroes.add(await _heroService.create(name));
+    selected = null;
+  }
+
+  Future<void> delete(Hero hero) async {
+    await _heroService.delete(hero.id);
+    heroes.remove(hero);
+    if (selected == hero) selected = null;
+  }
 
   Hero selected;
 
